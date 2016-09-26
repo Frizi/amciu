@@ -6,8 +6,16 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.HomePage.header',
-    defaultMessage: 'This is HomePage components !',
+  orders: {
+    id: 'app.components.HomePage.orders',
+    defaultMessage: 'Orders',
+  },
+  active: {
+    id: 'app.components.HomePage.active',
+    defaultMessage: 'Active',
+  },
+  history: {
+    id: 'app.components.HomePage.history',
+    defaultMessage: 'History',
   },
 });

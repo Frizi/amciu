@@ -6,10 +6,20 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
+import { reduxReactFirebase } from 'redux-react-firebase';
+
 import createReducer from './reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 const devtools = window.devToolsExtension || (() => (noop) => noop);
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyBUwPhpqIY3SA4qD8sDCwbKImLBndXKnyw',
+  authDomain: 'amcia-7e711.firebaseapp.com',
+  databaseURL: 'https://amcia-7e711.firebaseio.com',
+  storageBucket: 'amcia-7e711.appspot.com',
+  messagingSenderId: '946595155135',
+};
 
 export default function configureStore(initialState = {}, history) {
   // Create the store with two middlewares
@@ -22,6 +32,7 @@ export default function configureStore(initialState = {}, history) {
 
   const enhancers = [
     applyMiddleware(...middlewares),
+    reduxReactFirebase(firebaseConfig),
     devtools(),
   ];
 

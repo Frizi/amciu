@@ -23,8 +23,8 @@ module.exports = (options) => ({
       exclude: /node_modules/,
       query: options.babelQuery,
     }, {
-      // Transform our own .css files with PostCSS and CSS-modules
-      test: /\.css$/,
+      // Transform our own .scss files with PostCSS, CSS-modules and sass
+      test: /\.scss$/,
       exclude: /node_modules/,
       loader: options.cssLoaders,
     }, {
@@ -92,6 +92,9 @@ module.exports = (options) => ({
       'jsnext:main',
       'main',
     ],
+    alias: {
+      firebase: 'firebase/firebase.js',
+    },
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window

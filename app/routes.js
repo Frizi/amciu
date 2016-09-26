@@ -3,6 +3,7 @@
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
 import { getAsyncInjectors } from 'utils/asyncInjectors';
+import React from 'react';
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -12,27 +13,35 @@ const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default);
 };
 
+const Active = () => <div>active!</div>;
+const History = () => <div>history!</div>;
+
 export default function createRoutes(store) {
   // Create reusable async injectors using getAsyncInjectors factory
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
+
+  const activeRoute = {
+    name: 'active',
+    component: Active,
+  };
+
+  const historyRoute = {
+    path: 'history',
+    name: 'history',
+    component: History,
+  };
 
   return [
     {
       path: '/',
       name: 'home',
       getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/HomePage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([component]) => {
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
+        System.import('containers/HomePage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
       },
+      indexRoute: activeRoute,
+      childRoutes: [historyRoute],
     }, {
       path: '*',
       name: 'notfound',

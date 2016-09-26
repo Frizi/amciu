@@ -11,21 +11,41 @@
  * the linting exception.
  */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
+import AppHeader from '../../components/AppHeader';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
-import styles from './styles.css';
+import { firebase as withFirebase, helpers } from 'redux-react-firebase';
+const { pathToJS } = helpers;
 
-export default class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
+import styles from './styles.scss';
+
+class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
+    auth: PropTypes.object,
     children: React.PropTypes.node,
+    firebase: PropTypes.object.isRequired,
   };
 
   render() {
+    const { auth, firebase } = this.props;
     return (
       <div className={styles.container}>
+        <AppHeader auth={auth} onLogout={firebase.logout} />
         {React.Children.toArray(this.props.children)}
       </div>
     );
   }
 }
+
+export default compose(
+  withFirebase([]),
+  connect((state) => {
+    const firebase = state.get('firebase');
+    return {
+      auth: pathToJS(firebase, 'auth'),
+    };
+  })
+)(App);
