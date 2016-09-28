@@ -19,23 +19,33 @@ import { connect } from 'react-redux';
 import { firebase as withFirebase, helpers } from 'redux-react-firebase';
 const { pathToJS } = helpers;
 
+import Match from 'react-router/Match';
+import Miss from 'react-router/Miss';
+import ConnectedRouter from '../ConnectedRouter';
+
+import NotFoundPage from '../NotFoundPage';
+import HomePage from '../HomePage';
+
 import styles from './styles.scss';
 
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     auth: PropTypes.object,
-    children: React.PropTypes.node,
     firebase: PropTypes.object.isRequired,
   };
 
   render() {
-    const { auth, firebase } = this.props;
     return (
-      <div className={styles.container}>
-        <AppHeader auth={auth} onLogout={firebase.logout} />
-        {React.Children.toArray(this.props.children)}
-      </div>
+      <ConnectedRouter>
+        <div className={styles.container}>
+          <AppHeader auth={this.props.auth} onLogout={this.props.firebase.logout} />
+
+          <Match pattern="/" component={HomePage} />
+          <Match pattern="/history" component={HomePage} />
+          <Miss component={NotFoundPage} />
+        </div>
+      </ConnectedRouter>
     );
   }
 }
@@ -46,6 +56,7 @@ export default compose(
     const firebase = state.get('firebase');
     return {
       auth: pathToJS(firebase, 'auth'),
+      location: state.getIn(['route', 'location']),
     };
   })
 )(App);
