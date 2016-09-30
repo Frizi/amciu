@@ -1,0 +1,62 @@
+@import "../../core";
+
+.homePage {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: block;
+  width: $containerSizeXs;
+  margin: auto;
+
+  @include md {
+    width: $containerSizeMd;
+  }
+  @include lg {
+    width: $containerSizeLg;
+  }
+}
+
+.orderSection {
+  background: $lightBlue;
+  @include shadow;
+  flex: 1;
+}
+
+.header {
+  composes: container;
+}
+
+.tab {
+  display: inline-block;
+  padding: $unit-x2 $unit-x4;
+  font-size: $fontsize-large;
+  line-height: $unit-x2;
+  color: $gray;
+  text-decoration: none;
+  border-radius: 5px 5px 0 0;
+}
+
+.activeTab {
+  background: $lightBlue;
+  @include shadow;
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    left: -5px;
+    right: -5px;
+    bottom: -4px;
+    height: 4px;
+    background: $lightBlue;
+  }
+}
+
+h1 {
+  font-size: $fontsize-xlarge;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: $gray;
+  margin: $unit-x4 0;
+}

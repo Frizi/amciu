@@ -1,9 +1,21 @@
-/**
- * styles.css
- *
- * App container styles
- */
+@import "../../core";
+
+html, body {
+  height: 100%;
+}
+
+:global(#app) {
+  font-family: 'Lato', sans-serif;
+  height: 100%;
+}
 
 .container {
-  display: block;
+  height: 100%;
+  font-size: $fontsize-normal;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  flex: 1;
 }

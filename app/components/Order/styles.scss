@@ -1,0 +1,25 @@
+@import "../../core";
+
+.order {
+  background: white;
+  border-radius: 4px;
+  @include shadow;
+}
+
+.order + .order {
+  margin-top: 16px;
+}
+
+.topFrame {
+  font-weight: bold;
+
+  > * {
+    padding-top: $unit;
+    padding-bottom: $unit;
+    margin: $unit 0;
+
+    + * {
+      box-shadow: -1px 0 $lightGray;
+    }
+  }
+}

@@ -53,7 +53,7 @@ module.exports = {
     if (data.wantCSS) {
       actions.push({
         type: 'add',
-        path: '../../app/components/{{properCase name}}/styles.css',
+        path: '../../app/components/{{properCase name}}/styles.scss',
         templateFile: './component/styles.css.hbs',
         abortOnFail: true,
       });

@@ -3,20 +3,25 @@
 .appHeader {
   background: $brandBlue;
   display: flex;
+  color: white;
+  line-height: 60px;
+  padding: 0 40px;
+  box-shadow: inset -1px 0 3px rgba(black, 0.24);
 }
 
 .logo {
   flex: 1;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .profile {
   align-self: flex-end;
-  line-height: 30px;
-
 }
 
 .avatar {
   width: 30px;
   height: 30px;
+  margin: 0 5px;
   border-radius: 15px;
 }
