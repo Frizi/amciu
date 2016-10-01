@@ -6,20 +6,25 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { routerContext } from 'react-router/PropTypes';
 import Helmet from 'react-helmet';
 import OrderList from '../../components/OrdersList';
 import { compose } from 'redux';
-import { firebase as withFirebase, helpers } from 'redux-react-firebase';
-const { dataToJS } = helpers;
+import { ordersConnector, ordersSelector } from '../../utils/ordersService';
 
 export class ActiveOrdersPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
   static propTypes = {
-    orders: PropTypes.any,
+    orders: PropTypes.array,
+    params: PropTypes.object,
+  };
+
+  static contextTypes = {
+    router: routerContext,
   };
 
   render() {
-    const { orders } = this.props;
+    const { orders, params } = this.props;
+    const { router } = this.context;
     return (
       <div>
         <Helmet
@@ -28,12 +33,11 @@ export class ActiveOrdersPage extends React.Component { // eslint-disable-line r
             { name: 'description', content: 'Description of ActiveOrdersPage' },
           ]}
         />
-        <OrderList orders={orders} />
+        <OrderList orders={orders} activeKey={params.order} onFocus={(id) => router.transitionTo(`/${id}`)} />
       </div>
     );
   }
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -42,13 +46,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  withFirebase([
-    ['/orders#&orderByKey'],
-  ]),
-  connect((state) => {
-    const firebase = state.get('firebase');
-    return {
-      orders: dataToJS(firebase, '/orders') || {},
-    };
-  }, mapDispatchToProps)
+  ordersConnector,
+  connect((state) => ({
+    orders: ordersSelector(state)
+      .filter(([, order]) => !order.archived),
+  }), mapDispatchToProps)
 )(ActiveOrdersPage);

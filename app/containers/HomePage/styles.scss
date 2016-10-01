@@ -1,4 +1,4 @@
-@import "../../core";
+@import '../../core';
 
 .homePage {
   display: flex;
@@ -9,7 +9,6 @@
   display: block;
   width: $containerSizeXs;
   margin: auto;
-
   @include md {
     width: $containerSizeMd;
   }
@@ -20,8 +19,8 @@
 
 .orderSection {
   background: $lightBlue;
-  @include shadow;
   flex: 1;
+  @include shadow();
 }
 
 .header {
@@ -40,9 +39,10 @@
 
 .activeTab {
   background: $lightBlue;
-  @include shadow;
   position: relative;
-  &:after {
+  @include shadow();
+
+  &::after {
     content: '';
     position: absolute;
     left: -5px;

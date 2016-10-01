@@ -10,9 +10,9 @@ import cn from 'classnames';
 
 const defaultNode = <div />;
 
-function OrderFrame({ className, what, who, price }) {
+function OrderFrame({ className, what, who, price, ...props }) {
   return (
-    <div className={cn(styles.orderFrame, className)}>
+    <div className={cn(styles.orderFrame, className)} {...props}>
       {what || defaultNode}
       {who || defaultNode}
       {price || defaultNode}

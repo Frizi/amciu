@@ -94,6 +94,7 @@ module.exports = (options) => ({
     ],
     alias: {
       firebase: 'firebase/firebase.js',
+      'react-icon-base': 'react-icon-base/lib', // workaround for react-icons deps
     },
   },
   devtool: options.devtool,

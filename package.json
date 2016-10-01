@@ -33,7 +33,7 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:js": "npm run lint:eslint -- . ",
-    "lint:css": "stylelint ./app/**/*.css",
+    "lint:css": "stylelint ./app/**/*.scss",
     "lint:staged": "lint-staged",
     "pretest": "npm run test:clean && npm run lint",
     "test:clean": "rimraf ./coverage",
@@ -46,7 +46,7 @@
   },
   "lint-staged": {
     "*.js": "lint:eslint",
-    "*.css": "stylelint"
+    "*.scss": "stylelint"
   },
   "pre-commit": "lint:staged",
   "babel": {
@@ -146,6 +146,7 @@
       "react/jsx-no-target-blank": 0,
       "react/require-extension": 0,
       "react/self-closing-comp": 0,
+      "react/style-prop-object": 0,
       "require-yield": 0
     },
     "settings": {
@@ -162,6 +163,14 @@
       "color-hex-case": "upper",
       "string-quotes": "single",
       "font-family-name-quotes": "always-where-recommended",
+      "at-rule-empty-line-before": [
+        "always",
+        {
+          "except": [
+            "all-nested"
+          ]
+        }
+      ],
       "selector-pseudo-class-no-unknown": [
         true,
         {
@@ -217,11 +226,10 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-helmet": "3.1.0",
+    "react-icons": "^2.2.1",
     "react-intl": "2.1.5",
     "react-redux": "4.4.5",
-    "react-router": "^4.0.0-alpha.3",
-    "react-router-redux": "^4.0.6",
-    "react-router-scroll": "0.3.2",
+    "react-router": "^4.0.0-alpha.4",
     "redux": "3.6.0",
     "redux-immutable": "3.0.8",
     "redux-react-firebase": "^2.2.4",

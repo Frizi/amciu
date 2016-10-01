@@ -6,8 +6,16 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.Order.header',
-    defaultMessage: 'This is the Order component !',
+  meals: {
+    id: 'app.components.Order.meals',
+    defaultMessage: 'Meals',
+  },
+  orderer: {
+    id: 'app.components.Order.orderer',
+    defaultMessage: 'Orderer',
+  },
+  price: {
+    id: 'app.components.Order.price',
+    defaultMessage: 'Price',
   },
 });

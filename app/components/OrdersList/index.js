@@ -12,24 +12,32 @@ import Order from '../Order';
 import messages from './messages';
 import styles from './styles.scss';
 
-import { map } from 'lodash';
 
-function OrdersList({ orders }) {
+function OrdersList({ orders, activeKey, onFocus }) {
   return (
-    <div className={styles.ordersList}>
+    <div>
       <OrderFrame
         className={styles.header}
         what={<FormattedMessage {...messages.from} />}
         who={<FormattedMessage {...messages.owner} />}
         price={<FormattedMessage {...messages.price} />}
       />
-      {map(orders, (order, key) => <Order key={key} order={order} />)}
+      {orders.map(([key, order]) => (
+        <Order
+          key={key}
+          order={order}
+          active={key === activeKey}
+          onFocus={() => onFocus(key)}
+        />
+      ))}
     </div>
   );
 }
 
 OrdersList.propTypes = {
-  orders: PropTypes.object.isRequired,
+  orders: PropTypes.array.isRequired,
+  activeKey: PropTypes.string,
+  onFocus: PropTypes.func,
 };
 
 export default OrdersList;

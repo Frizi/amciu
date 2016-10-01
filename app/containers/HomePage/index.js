@@ -30,9 +30,11 @@ export default class HomePage extends React.Component { // eslint-disable-line r
         <section className={styles.header}>
           <h1><FormattedMessage {...messages.orders} /></h1>
           <nav>
-            <Link className={styles.tab} activeClassName={styles.activeTab} activeOnlyWhenExact to="/">
-              <FormattedMessage {...messages.active} />
-            </Link>
+            <Match pattern="/:order(\d+)?">{({ matched }) => (
+              <Link className={styles.tab} activeClassName={styles.activeTab} isActive={() => matched} to="/">
+                <FormattedMessage {...messages.active} />
+              </Link>
+            )}</Match>
             <Link className={styles.tab} activeClassName={styles.activeTab} to="/history">
               <FormattedMessage {...messages.history} />
             </Link>

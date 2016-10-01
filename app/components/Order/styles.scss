@@ -1,4 +1,4 @@
-@import "../../core";
+@import '../../core';
 
 .order {
   background: white;
@@ -22,4 +22,28 @@
       box-shadow: -1px 0 $lightGray;
     }
   }
+}
+
+.priceWrap {
+  display: flex;
+  align-items: center;
+}
+
+.priceText {
+  display: block;
+  flex: 1;
+}
+
+.chevron {
+  font-size: $unit-x3;
+  margin: -$unit 0;
+}
+
+.details {
+  border-top: 1px solid $lightGray;
+  padding: $unit-x2 0;
+}
+
+.mealsHeader {
+  color: $dimGray;
 }
