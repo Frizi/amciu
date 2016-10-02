@@ -8,6 +8,7 @@
   line-height: $unit-x2;
   text-decoration: none;
   border-radius: 3px;
+  vertical-align: middle;
 }
 
 .buttonShadow {
@@ -33,7 +34,7 @@
 
 .flat {
   composes: button;
-  color: $gray;
+  color: $dimGray;
 }
 
 .wrapper {

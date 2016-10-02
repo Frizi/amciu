@@ -9,7 +9,7 @@
 @mixin modalPos-off { transform: translate(-50%, -100%) translate(0, -200px); }
 
 .backdrop {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;

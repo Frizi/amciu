@@ -4,6 +4,7 @@
  */
 
 import { combineReducers } from 'redux-immutable';
+import { combineForms } from 'react-redux-form';
 import { routerReducer } from './containers/ConnectedRouter/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import { firebaseStateReducer } from 'redux-react-firebase';
@@ -16,6 +17,12 @@ export default function createReducer(asyncReducers) {
     router: routerReducer,
     language: languageProviderReducer,
     firebase: firebaseStateReducer,
+    forms: combineForms({
+      createOrder: {
+        name: '',
+      },
+      createMeal: {},
+    }),
     ...asyncReducers,
   });
 }

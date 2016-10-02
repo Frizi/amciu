@@ -21,7 +21,7 @@ export default class Button extends React.Component {
   static propTypes = {
     ...Link.propTypes,
     to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    variant: PropTypes.oneOf(['default', 'primary', 'flat']),
+    variant: PropTypes.oneOf(['default', 'primary', 'flat', 'wrapper']),
   };
 
   state = {

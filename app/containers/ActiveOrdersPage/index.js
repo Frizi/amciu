@@ -1,9 +1,3 @@
-/*
- *
- * ActiveOrdersPage
- *
- */
-
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { routerContext } from 'react-router/PropTypes';
@@ -16,8 +10,8 @@ import { compose } from 'redux';
 import { ordersConnector, ordersSelector } from '../../utils/ordersService';
 import styles from './styles.scss';
 import FaPlus from 'react-icons/lib/fa/plus';
-import Modal from '../../components/Modal';
 import messages from './messages';
+import CreateOrderModal from '../CreateOrderModal';
 
 export class ActiveOrdersPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -32,11 +26,7 @@ export class ActiveOrdersPage extends React.Component { // eslint-disable-line r
   render() {
     const { orders, params } = this.props;
     const { router } = this.context;
-
-
     const newPath = params.order ? `/${params.order}/new` : '/new';
-    const returnPath = params.order ? `/${params.order}` : '/';
-    const closeModal = () => router.transitionTo(returnPath);
 
     return (
       <div>
@@ -48,19 +38,7 @@ export class ActiveOrdersPage extends React.Component { // eslint-disable-line r
           </Button>
         </div>
         <OrderList orders={orders} activeKey={params.order} onFocus={(id) => router.transitionTo(`/${id}`)} />
-        <Match pattern="/:id?/new">{({ matched }) => {
-          if (matched) {
-            return (
-              <Modal
-                title={<FormattedMessage {...messages.createOrder} />}
-                onClose={closeModal}
-              >
-                New!
-              </Modal>
-            );
-          }
-          return null;
-        }}</Match>
+        <Match pattern="/:id?/new" component={CreateOrderModal} />
       </div>
     );
   }

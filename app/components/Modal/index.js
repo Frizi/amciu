@@ -27,11 +27,18 @@ export default class Modal extends React.Component {
     title: PropTypes.node,
     children: PropTypes.node,
     onClose: PropTypes.func.isRequired,
+    triggerClose: PropTypes.bool,
   };
 
   state = {
     opened: true,
   };
+
+  componentWillReceiveProps({ triggerClose }) {
+    if (triggerClose) {
+      this.onClose();
+    }
+  }
 
   onClose = ::this.onClose;
   onClose() {
