@@ -35,13 +35,17 @@ export class ActiveOrdersPage extends React.Component { // eslint-disable-line r
 
 
     const newPath = params.order ? `/${params.order}/new` : '/new';
-    const closeModal = () => router.transitionTo(`/${params.order}`);
+    const returnPath = params.order ? `/${params.order}` : '/';
+    const closeModal = () => router.transitionTo(returnPath);
 
     return (
       <div>
         <Helmet title="Active Orders - AmciuApp" />
         <div className={styles.actions}>
-          <Button to={newPath}><FaPlus /> <FormattedMessage {...messages.createOrder} /></Button>
+          <Button className={styles.buttonFullsize} to={newPath}>
+            <FaPlus />
+            <FormattedMessage {...messages.createOrder} />
+          </Button>
         </div>
         <OrderList orders={orders} activeKey={params.order} onFocus={(id) => router.transitionTo(`/${id}`)} />
         <Match pattern="/:id?/new">{({ matched }) => {

@@ -2,8 +2,10 @@
 
 .order {
   background: white;
-  border-radius: 4px;
   @include shadow;
+  @include md {
+    border-radius: 4px;
+  }
 }
 
 .order + .order {

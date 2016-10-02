@@ -21,17 +21,26 @@ $unit-x4: $unit * 4;
 $unit-x6: $unit * 6;
 
 $containerSizeXs: 100%;
+$containerSizeSm: 420px;
 $containerSizeMd: 720px;
 $containerSizeLg: 960px;
 
+$breakpointPad: 10px;
+
+@mixin sm {
+  @media only screen and (min-width: ($containerSizeSm + $breakpointPad)) {
+    @content;
+  }
+}
+
 @mixin md {
-  @media only screen and (min-width: $containerSizeMd) {
+  @media only screen and (min-width: ($containerSizeMd + $breakpointPad)) {
     @content;
   }
 }
 
 @mixin lg {
-  @media only screen and (min-width: $containerSizeLg) {
+  @media only screen and (min-width: ($containerSizeLg + $breakpointPad)) {
     @content;
   }
 }

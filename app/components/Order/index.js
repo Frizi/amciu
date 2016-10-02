@@ -13,6 +13,7 @@ import FaAngleDown from 'react-icons/lib/fa/angle-down';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 
 import OrderFrame from '../OrderFrame';
+import Button from '../Button';
 import Meal from '../Meal';
 
 import styles from './styles.scss';
@@ -24,24 +25,25 @@ function Order({ order, active, onFocus }) {
   const Chevron = active ? FaAngleUp : FaAngleDown;
   return (
     <div className={styles.order}>
-      <OrderFrame
-        onClick={onFocus}
-        className={styles.topFrame}
-        what={<div>{order.from}</div>}
-        who={<div>{order.owner}</div>}
-        price={
-          <div className={styles.priceWrap}>
-            <div className={styles.priceText}>
-              <FormattedNumber
-                style="currency"
-                currency="PLN"
-                value={priceSum(order.meals) / 100}
-              />
+      <Button variant="wrapper" onClick={onFocus}>
+        <OrderFrame
+          className={styles.topFrame}
+          what={<div>{order.from}</div>}
+          who={<div>{order.owner}</div>}
+          price={
+            <div className={styles.priceWrap}>
+              <div className={styles.priceText}>
+                <FormattedNumber
+                  style="currency"
+                  currency="PLN"
+                  value={priceSum(order.meals) / 100}
+                />
+              </div>
+              <Chevron className={styles.chevron} />
             </div>
-            <Chevron className={styles.chevron} />
-          </div>
-        }
-      />
+          }
+        />
+      </Button>
       {active &&
         <div className={styles.details}>
           {order.meals && order.meals.length > 0 &&

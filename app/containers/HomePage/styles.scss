@@ -9,11 +9,14 @@
   display: block;
   width: $containerSizeXs;
   margin: auto;
+  @include lg {
+    max-width: $containerSizeSm;
+  }
   @include md {
-    width: $containerSizeMd;
+    max-width: $containerSizeMd;
   }
   @include lg {
-    width: $containerSizeLg;
+    max-width: $containerSizeLg;
   }
 }
 
@@ -26,6 +29,10 @@
 
 .header {
   composes: container;
+  padding: 0 $unit-x4;
+  @include md {
+    padding: 0;
+  }
 }
 
 .tab {

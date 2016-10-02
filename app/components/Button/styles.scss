@@ -35,3 +35,14 @@
   composes: button;
   color: $gray;
 }
+
+.wrapper {
+  display: block;
+  width: 100%;
+  position: relative; // contain ripple
+  overflow: hidden;
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -10,6 +10,7 @@ import React, { PropTypes } from 'react';
 import Link from 'react-router/Link';
 import Ripple from 'react-ripple-effect/src/js/components/react-ripple';
 
+import cn from 'classnames';
 import styles from './styles.scss';
 
 export default class Button extends React.Component {
@@ -38,28 +39,31 @@ export default class Button extends React.Component {
   }
 
   render() {
-    const { variant, children, ...rest } = this.props;
+    const { variant, children, className, ...rest } = this.props;
 
     const handlers = {
       onMouseUp: this.handleClick,
       onTouchEnd: this.handleClick,
     };
 
-    const className = styles[variant];
+    const finalClassName = cn(className, styles[variant]);
     const ripple = <Ripple cursorPos={this.state.cursorPos} />;
-    if (this.props.to) {
-      return (
-        <Link className={className} {...handlers} {...rest}>
-          {children}
-          {ripple}
-        </Link>
-      );
-    }
+
+    const Component = (() => {
+      if (this.props.to) {
+        return Link;
+      }
+      if (variant === 'wrapper') {
+        return 'div';
+      }
+      return 'button';
+    })();
+
     return (
-      <button className={className} {...handlers} {...rest}>
+      <Component tabIndex="-1" className={finalClassName} {...handlers} {...rest}>
         {children}
         {ripple}
-      </button>
+      </Component>
     );
   }
 }

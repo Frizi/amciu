@@ -1,41 +1,101 @@
 @import '../../core';
 
+@mixin backdrop { opacity: 1; }
+
+@mixin backdrop-off { opacity: 0; }
+
+@mixin modalPos { transform: translate(-50%, -50%) translate(0, 0); }
+
+@mixin modalPos-off { transform: translate(-50%, -100%) translate(0, -200px); }
+
 .backdrop {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
-  background: rgba(black, 0.4);
+  background: rgba(black, 0.5);
 }
 
 .modal {
-  box-shadow: 0 0 5px black;
-}
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: white;
+  border-radius: 4px;
+  min-width: 400px;
+  @include modalPos();
+  @include shadow();
 
-.enter {
-  .backdrop {
-    transition: background 250ms;
-    background: rgba(black, 0);
+  &:focus {
+    outline: none;
   }
 }
 
-.enter.active {
-  .backdrop {
-    background: rgba(black, 0.4);
+.title {
+  padding: $unit-x2;
+  font-size: $fontsize-large;
+  line-height: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.titleContent {
+  flex: 1;
+}
+
+.close {
+  color: $dimGray;
+}
+
+.body {
+  border-top: 1px solid $lightGray;
+  padding: $unit-x2;
+}
+
+// animation
+
+.enter {
+  &.backdrop {
+    @include backdrop-off();
+  }
+
+  .modal {
+    @include modalPos-off();
+  }
+}
+
+.enterActive {
+  &.backdrop {
+    transition: opacity 250ms;
+    @include backdrop();
+  }
+
+  .modal {
+    transition: transform 250ms ease-out;
+    @include modalPos();
   }
 }
 
 .leave {
-  .backdrop {
-    transition: background 250ms;
-    background: rgba(black, 0.4);
+  &.backdrop {
+    @include backdrop();
+  }
+
+  .modal {
+    @include modalPos();
   }
 }
 
-.leave.active {
-  .backdrop {
-    transition: background 250ms;
-    background: rgba(black, 0);
+.leaveActive {
+  &.backdrop {
+    transition: opacity 250ms;
+    @include backdrop-off();
+  }
+
+  .modal {
+    transition: transform 250ms ease-in;
+    @include modalPos-off();
   }
 }

@@ -1,5 +1,18 @@
 @import '../../core';
 
 .actions {
+  display: flex;
   margin: 30px 0;
+  padding: 0 $unit-x2;
+  @include md {
+    padding: 0;
+  }
+}
+
+.buttonFullsize {
+  display: block;
+  width: 100%;
+  @include sm {
+    width: auto;
+  }
 }
