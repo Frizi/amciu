@@ -2,6 +2,7 @@
  * TEST WEBPACK CONFIGURATION
  */
 
+const path = require('path');
 const webpack = require('webpack');
 const modules = [
   'app',
@@ -29,7 +30,10 @@ module.exports = {
       },
       { test: /\.js$/,
         loader: 'babel',
-        exclude: [/node_modules/],
+        include: [
+          path.resolve(process.cwd(), 'app'),
+          path.resolve(process.cwd(), 'node_modules/react-ripple-effect'),
+        ],
       },
       { test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
         loader: 'null-loader',

@@ -1,0 +1,41 @@
+@import '../../core';
+
+.backdrop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: rgba(black, 0.4);
+}
+
+.modal {
+  box-shadow: 0 0 5px black;
+}
+
+.enter {
+  .backdrop {
+    transition: background 250ms;
+    background: rgba(black, 0);
+  }
+}
+
+.enter.active {
+  .backdrop {
+    background: rgba(black, 0.4);
+  }
+}
+
+.leave {
+  .backdrop {
+    transition: background 250ms;
+    background: rgba(black, 0.4);
+  }
+}
+
+.leave.active {
+  .backdrop {
+    transition: background 250ms;
+    background: rgba(black, 0);
+  }
+}

@@ -1,0 +1,9 @@
+@import '../../core';
+
+.meal {
+  padding: $unit-x2 0;
+}
+
+.meal:nth-child(2n) {
+  background-color: $accentWhite;
+}

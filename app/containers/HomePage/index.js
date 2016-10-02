@@ -25,12 +25,15 @@ export default class HomePage extends React.Component { // eslint-disable-line r
   };
 
   render() {
+    const activePattern = '/:order(\\d+)?/:new(new)?';
+    const historyPattern = '/history/:order(\\d+)?';
+
     return (
       <div className={cn(styles.homePage, this.props.className)}>
         <section className={styles.header}>
           <h1><FormattedMessage {...messages.orders} /></h1>
           <nav>
-            <Match pattern="/:order(\d+)?">{({ matched }) => (
+            <Match pattern={activePattern}>{({ matched }) => (
               <Link className={styles.tab} activeClassName={styles.activeTab} isActive={() => matched} to="/">
                 <FormattedMessage {...messages.active} />
               </Link>
@@ -42,8 +45,8 @@ export default class HomePage extends React.Component { // eslint-disable-line r
         </section>
         <section className={styles.orderSection}>
           <div className={styles.container}>
-            <Match pattern="/history/:order(\d+)?" component={HistoryOrdersPage} />
-            <Match pattern="/:order(\d+)?" component={ActiveOrdersPage} />
+            <Match pattern={historyPattern} component={HistoryOrdersPage} />
+            <Match pattern={activePattern} component={ActiveOrdersPage} />
             <Miss component={NotFoundPage} />
           </div>
         </section>

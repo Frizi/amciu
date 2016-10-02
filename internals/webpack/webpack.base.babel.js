@@ -20,7 +20,10 @@ module.exports = (options) => ({
     loaders: [{
       test: /\.js$/, // Transform all .js files required somewhere with Babel
       loader: 'babel',
-      exclude: /node_modules/,
+      include: [
+        path.resolve(process.cwd(), 'app'),
+        path.resolve(process.cwd(), 'node_modules/react-ripple-effect'),
+      ],
       query: options.babelQuery,
     }, {
       // Transform our own .scss files with PostCSS, CSS-modules and sass
@@ -36,6 +39,10 @@ module.exports = (options) => ({
       test: /\.css$/,
       include: /node_modules/,
       loaders: ['style-loader', 'css-loader'],
+    }, {
+      test: /\.s(c|a)ss$/,
+      include: /node_modules/,
+      loaders: ['style-loader', 'css-loader', 'sass-loader'],
     }, {
       test: /\.(eot|svg|ttf|woff|woff2)$/,
       loader: 'file-loader',

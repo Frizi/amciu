@@ -27,12 +27,7 @@ export class HistoryOrdersPage extends React.Component { // eslint-disable-line 
     const { router } = this.context;
     return (
       <div>
-        <Helmet
-          title="ActiveOrdersPage"
-          meta={[
-            { name: 'description', content: 'Description of ActiveOrdersPage' },
-          ]}
-        />
+        <Helmet title="History - AmciuApp" />
         <OrderList orders={orders} activeKey={params.order} onFocus={(id) => router.transitionTo(`/history/${id}`)} />
       </div>
     );

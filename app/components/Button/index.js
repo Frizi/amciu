@@ -6,42 +6,60 @@
  * otherwise it'll render a link with an onclick
  */
 
-import React, { PropTypes, Children } from 'react';
+import React, { PropTypes } from 'react';
+import Link from 'react-router/Link';
+import Ripple from 'react-ripple-effect/src/js/components/react-ripple';
 
 import styles from './styles.scss';
 
-function Button(props) {
-  const className = props.className ? props.className : styles.button;
+export default class Button extends React.Component {
+  static defaultProps = {
+    variant: 'default',
+  };
 
-  // Render an anchor tag
-  let button = (
-    <a className={className} href={props.href} onClick={props.onClick}>
-      {Children.toArray(props.children)}
-    </a>
-  );
+  static propTypes = {
+    ...Link.propTypes,
+    to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    variant: PropTypes.oneOf(['default', 'primary', 'flat']),
+  };
 
-  // If the Button has a handleRoute prop, we want to render a button
-  if (props.handleRoute) {
-    button = (
-      <button className={className} onClick={props.handleRoute}>
-        {Children.toArray(props.children)}
+  state = {
+    cursorPos: {},
+  };
+
+  handleClick = ::this.handleClick;
+  handleClick(e) {
+    const cursorPos = {
+      top: e.clientY,
+      left: e.clientX,
+      time: Date.now(),
+    };
+    this.setState({ cursorPos });
+  }
+
+  render() {
+    const { variant, children, ...rest } = this.props;
+
+    const handlers = {
+      onMouseUp: this.handleClick,
+      onTouchEnd: this.handleClick,
+    };
+
+    const className = styles[variant];
+    const ripple = <Ripple cursorPos={this.state.cursorPos} />;
+    if (this.props.to) {
+      return (
+        <Link className={className} {...handlers} {...rest}>
+          {children}
+          {ripple}
+        </Link>
+      );
+    }
+    return (
+      <button className={className} {...handlers} {...rest}>
+        {children}
+        {ripple}
       </button>
     );
   }
-
-  return (
-    <div className={styles.buttonWrapper}>
-      {button}
-    </div>
-  );
 }
-
-Button.propTypes = {
-  className: PropTypes.string,
-  handleRoute: PropTypes.func,
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  children: PropTypes.node.isRequired,
-};
-
-export default Button;

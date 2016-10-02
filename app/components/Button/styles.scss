@@ -1,29 +1,37 @@
-.buttonWrapper {
-  width: 100%;
-  text-align: center;
-  margin: 4em 0;
-}
+@import '../../core';
 
 .button {
+  position: relative; // contain ripple
+  overflow: hidden;
   display: inline-block;
-  box-sizing: border-box;
-  padding: 0.25em 2em;
-  margin: 0;
+  padding: $unit $unit-x2;
+  line-height: $unit-x2;
   text-decoration: none;
-  border-radius: 4px;
-  -webkit-font-smoothing: antialiased;
-  -webkit-touch-callout: none;
-  user-select: none;
-  cursor: pointer;
-  outline: 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 16px;
-  border: 2px solid #41ADDD;
-  color: #41ADDD;
+  border-radius: 3px;
 }
 
-.button:active {
-  background: #41ADDD;
-  color: #FFF;
+.buttonShadow {
+  transition: box-shadow 0.1s;
+  @include shadow();
+
+  &:hover {
+    @include shadow-2();
+  }
+}
+
+.default {
+  composes: button buttonShadow;
+  background-color: white;
+  color: black;
+}
+
+.primary {
+  composes: button buttonShadow;
+  background-color: $brandBlue;
+  color: white;
+}
+
+.flat {
+  composes: button;
+  color: $gray;
 }

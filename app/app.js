@@ -17,6 +17,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import LanguageProvider from 'containers/LanguageProvider';
+import { GatewayProvider } from 'react-gateway';
 import configureStore from './store';
 
 // Import i18n messages
@@ -36,7 +37,9 @@ const render = (translatedMessages) => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={translatedMessages}>
-        <App />
+        <GatewayProvider>
+          <App />
+        </GatewayProvider>
       </LanguageProvider>
     </Provider>,
     document.getElementById('app')

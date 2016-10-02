@@ -6,6 +6,7 @@ $lightBlue: #E9F9FF;
 $gray: #4A4A4A;
 $dimGray: #9B9B9B;
 $lightGray: #E0E0E0;
+$accentWhite: #F9F9F9;
 
 // fonts
 $fontsize-normal: 14px;
@@ -43,6 +44,6 @@ $containerSizeLg: 960px;
   box-shadow: 0 3px 6px rgba(black, 0.16), 0 3px 6px rgba(black, 0.23);
 }
 
-@mixin shadow-2 {
+@mixin shadow-3 {
   box-shadow: 0 10px 20px rgba(black, 0.19), 0 6px 6px rgba(black, 0.23);
 }

@@ -20,10 +20,13 @@ import { firebase as withFirebase, helpers } from 'redux-react-firebase';
 const { pathToJS } = helpers;
 
 import ConnectedRouter from '../ConnectedRouter';
-
+import { GatewayDest } from 'react-gateway';
+import ReactModal2 from 'react-modal2';
 import HomePage from '../HomePage';
 
 import styles from './styles.scss';
+
+ReactModal2.getApplicationElement = () => document.getElementById('appContainer');
 
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -35,8 +38,11 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
     return (
       <ConnectedRouter>
         <div className={styles.container}>
-          <AppHeader auth={this.props.auth} onLogout={this.props.firebase.logout} />
-          <HomePage className={styles.page} />
+          <div id="appContainer" className={styles.container}>
+            <AppHeader auth={this.props.auth} onLogout={this.props.firebase.logout} />
+            <HomePage className={styles.page} />
+          </div>
+          <GatewayDest name="modalSlot" />
         </div>
       </ConnectedRouter>
     );
