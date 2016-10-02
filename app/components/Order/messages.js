@@ -10,6 +10,10 @@ export default defineMessages({
     id: 'app.components.Order.meals',
     defaultMessage: 'Meals',
   },
+  status: {
+    id: 'app.components.Order.status',
+    defaultMessage: 'Status:',
+  },
   orderer: {
     id: 'app.components.Order.orderer',
     defaultMessage: 'Orderer',
@@ -17,5 +21,13 @@ export default defineMessages({
   price: {
     id: 'app.components.Order.price',
     defaultMessage: 'Price',
+  },
+  addMeal: {
+    id: 'app.components.Order.addMeal',
+    defaultMessage: 'Add Meal',
+  },
+  archive: {
+    id: 'app.components.Order.archive',
+    defaultMessage: 'Archive',
   },
 });

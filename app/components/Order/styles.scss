@@ -49,3 +49,37 @@
 .mealsHeader {
   color: $dimGray;
 }
+
+.detailsTop {
+  padding: 0 $unit-x2;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column-reverse;
+
+  > * + * {
+    margin-bottom: $unit;
+  }
+  @include sm {
+    align-items: center;
+    flex-direction: row;
+
+    > * + * {
+      margin-bottom: 0;
+      margin-left: $unit;
+    }
+  }
+}
+
+.detailsTop + .mealsHeader {
+  margin-top: $unit-x4;
+}
+
+.statusText {
+  flex: 1;
+  text-align: right;
+  color: $dimGray;
+  display: none;
+  @include sm {
+    display: block;
+  }
+}

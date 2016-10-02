@@ -1,0 +1,15 @@
+@import '../../core';
+
+.inputGroup {
+  margin-bottom: $unit-x2;
+  display: block;
+
+  > input {
+    display: block;
+    width: 100%;
+    border: 1px solid $lightGray;
+    padding: $unit;
+    border-radius: 4px;
+    line-height: $unit-x2;
+  }
+}

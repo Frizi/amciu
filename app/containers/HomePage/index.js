@@ -25,8 +25,8 @@ export default class HomePage extends React.Component { // eslint-disable-line r
   };
 
   render() {
-    const activePattern = '/:order(.{8,})?/:new(new)?';
-    const historyPattern = '/history/:order(.{8,})?';
+    const activePattern = '/:order([^/]{8,})?/:new(new|new-meal)?';
+    const historyPattern = '/history/:order([^/]{8,})?';
 
     return (
       <div className={cn(styles.homePage, this.props.className)}>
@@ -47,7 +47,7 @@ export default class HomePage extends React.Component { // eslint-disable-line r
           <div className={styles.container}>
             <Match pattern={historyPattern} component={HistoryOrdersPage} />
             <Match pattern={activePattern} component={ActiveOrdersPage} />
-            <Miss render={NotFoundPage} />
+            <Miss component={NotFoundPage} />
           </div>
         </section>
       </div>

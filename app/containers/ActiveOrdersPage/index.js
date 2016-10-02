@@ -11,7 +11,8 @@ import { ordersConnector, ordersSelector } from '../../utils/ordersService';
 import styles from './styles.scss';
 import FaPlus from 'react-icons/lib/fa/plus';
 import messages from './messages';
-import CreateOrderModal from '../CreateOrderModal';
+import OrderModal from '../OrderModal';
+import MealModal from '../MealModal';
 
 export class ActiveOrdersPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -37,8 +38,14 @@ export class ActiveOrdersPage extends React.Component { // eslint-disable-line r
             <FormattedMessage {...messages.createOrder} />
           </Button>
         </div>
-        <OrderList orders={orders} activeKey={params.order} onFocus={(id) => router.transitionTo(`/${id}`)} />
-        <Match pattern="/:id?/new" component={CreateOrderModal} />
+        <OrderList
+          orders={orders}
+          activeKey={params.order}
+          onFocus={(id) => router.transitionTo(`/${id}`)}
+          onAddMeal={(id) => router.transitionTo(`/${id}/new-meal`)}
+        />
+        <Match pattern="/:order?/new" component={OrderModal} />
+        <Match pattern="/:order?/new-meal" component={MealModal} />
       </div>
     );
   }

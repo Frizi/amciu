@@ -11,9 +11,18 @@ import OrderFrame from '../OrderFrame';
 import Order from '../Order';
 import messages from './messages';
 import styles from './styles.scss';
+import { firebase as withFirebase } from 'redux-react-firebase';
 
 
-function OrdersList({ orders, activeKey, onFocus }) {
+function OrdersList({ orders, activeKey, onFocus, onAddMeal, firebase }) {
+  const updateStatus = (key, status) => {
+    firebase.set(`/orders/${key}/status`, status);
+  };
+
+  const archive = (key) => {
+    firebase.set(`/orders/${key}/archived`, true);
+  };
+
   return (
     <div>
       <OrderFrame
@@ -28,6 +37,9 @@ function OrdersList({ orders, activeKey, onFocus }) {
           order={order}
           active={key === activeKey}
           onFocus={() => onFocus(key)}
+          onAddMeal={() => onAddMeal(key)}
+          onStatusChange={(status) => updateStatus(key, status)}
+          onArchive={() => archive(key)}
         />
       ))}
     </div>
@@ -37,7 +49,9 @@ function OrdersList({ orders, activeKey, onFocus }) {
 OrdersList.propTypes = {
   orders: PropTypes.array.isRequired,
   activeKey: PropTypes.string,
-  onFocus: PropTypes.func,
+  onFocus: PropTypes.func.isRequired,
+  onAddMeal: PropTypes.func,
+  firebase: PropTypes.object.isRequired,
 };
 
-export default OrdersList;
+export default withFirebase()(OrdersList);

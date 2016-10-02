@@ -1,9 +1,3 @@
-/**
-*
-* Modal
-*
-*/
-
 import React, { PropTypes } from 'react';
 import { Gateway } from 'react-gateway';
 

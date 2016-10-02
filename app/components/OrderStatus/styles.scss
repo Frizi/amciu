@@ -1,0 +1,120 @@
+@import '../../core';
+
+$arrowAngle: 25.5deg;
+$arrowWidth: 12px;
+
+$boxHeight: $unit-x4;
+
+.statusBar {
+  display: flex;
+}
+
+.box {
+  position: relative;
+  text-align: center;
+  line-height: $boxHeight;
+  padding: 0 ($unit-x2 - $arrowWidth / 2) 0 $unit-x2;
+  color: $gray;
+  border: 2px solid $lightGray;
+  border-right-width: 0;
+  background: $lightGray;
+  display: none;
+  flex: 1;
+  @include shadow();
+  @include sm {
+    flex: auto;
+  }
+  @include md {
+    display: block;
+  }
+
+  svg + span {
+    margin-left: $unit / 2;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    cursor: inherit;
+    display: block;
+    position: absolute;
+    z-index: 1;
+    right: 2px;
+    top: -2px;
+    height: $boxHeight / 2 + 2px;
+    width: $arrowWidth;
+    background: inherit;
+    transform-origin: 100% 0;
+    transform: skew($arrowAngle);
+    color: $lightGray;
+    border-top: 2px solid currentColor;
+    box-shadow:
+      2px 0 0 currentColor,
+      3px 0 rgba(black, 0.2),
+      4px 0 rgba(black, 0.1);
+  }
+
+  &::after {
+    border-top: none;
+    border-bottom: 2px solid currentColor;
+    transform-origin: 100% 100%;
+    transform: skew(-$arrowAngle);
+    top: auto;
+    bottom: -2px;
+    box-shadow:
+      2.5px 0 0 currentColor,
+      3px 0 rgba(black, 0.15),
+      4px 0 rgba(black, 0.1),
+      5px 0 rgba(black, 0.1);
+  }
+
+  &:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+
+  &:last-child {
+    border-radius: 0 4px 4px 0;
+    border-right-width: 2px;
+    padding: 0 $unit-x2;
+
+    &::before,
+    &::after {
+      content: normal;
+    }
+  }
+}
+
+.activeBox {
+  composes: box;
+  background: white;
+  color: $brandBlue;
+  border-color: $brandBlue;
+  display: block;
+
+  &,
+  &:last-child {
+    border-radius: 4px;
+  }
+
+  &::before,
+  &::after {
+    color: $brandBlue;
+  }
+}
+
+.activeBox + .box {
+  color: black;
+  background: white;
+  border-color: white;
+  cursor: pointer;
+  display: block;
+
+  &::before,
+  &::after {
+    color: white;
+  }
+}

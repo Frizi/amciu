@@ -4,11 +4,16 @@
   position: relative; // contain ripple
   overflow: hidden;
   display: inline-block;
-  padding: $unit $unit-x2;
+  padding: ($unit + 2px) ($unit-x2 + 2px);
   line-height: $unit-x2;
   text-decoration: none;
   border-radius: 3px;
   vertical-align: middle;
+  text-align: center;
+
+  > * + * {
+    margin-left: $unit / 2;
+  }
 }
 
 .buttonShadow {

@@ -10,7 +10,7 @@ import InputGroup from '../../components/InputGroup';
 import Button from '../../components/Button';
 import { firebase as withFirebase } from 'redux-react-firebase';
 
-export class CreateOrderModal extends React.Component {
+export class OrderModal extends React.Component {
   static propTypes = {
     auth: PropTypes.object,
     formData: PropTypes.object.isRequired,
@@ -98,4 +98,4 @@ export default compose(
     auth: state.getIn(['firebase', 'auth']),
     formData: state.get('forms').createOrder,
   }), mapDispatchToProps)
-)(CreateOrderModal);
+)(OrderModal);
