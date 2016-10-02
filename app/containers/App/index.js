@@ -36,7 +36,7 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
 
   render() {
     return (
-      <ConnectedRouter>
+      <ConnectedRouter basename="/amciu">
         <div className={styles.container}>
           <div id="appContainer" className={styles.container}>
             <AppHeader auth={this.props.auth} onLogout={this.props.firebase.logout} />
