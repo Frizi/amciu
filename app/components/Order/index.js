@@ -24,7 +24,7 @@ import OrderStatus from '../OrderStatus';
 import styles from './styles.scss';
 
 const priceSum = (meals = []) =>
-  meals.reduce((sum, meal) => sum + meal.price, 0);
+  meals.reduce((sum, meal) => sum + meal[1].price, 0);
 
 const getMeals = (mealsSrc) =>
   orderBy(toPairs(mealsSrc || []), 0);
