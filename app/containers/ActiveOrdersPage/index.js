@@ -17,6 +17,7 @@ import MealModal from '../MealModal';
 export class ActiveOrdersPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     orders: PropTypes.array.isRequired,
+    currentUser: PropTypes.string,
     params: PropTypes.object.isRequired,
   };
 
@@ -25,7 +26,7 @@ export class ActiveOrdersPage extends React.Component { // eslint-disable-line r
   };
 
   render() {
-    const { orders, params } = this.props;
+    const { orders, params, currentUser } = this.props;
     const { router } = this.context;
     const newPath = params.order ? `/${params.order}/new` : '/new';
 
@@ -43,6 +44,7 @@ export class ActiveOrdersPage extends React.Component { // eslint-disable-line r
           activeKey={params.order}
           onFocus={(id) => router.transitionTo(`/${id}`)}
           onAddMeal={(id) => router.transitionTo(`/${id}/new-meal`)}
+          currentUser={currentUser}
         />
         <Match pattern="/:order?/new" component={OrderModal} />
         <Match pattern="/:order?/new-meal" component={MealModal} />
@@ -60,6 +62,7 @@ function mapDispatchToProps(dispatch) {
 export default compose(
   ordersConnector,
   connect((state) => ({
+    currentUser: (state.getIn(['firebase', 'auth']) || {}).displayName,
     orders: ordersSelector(state)
       .filter(([, order]) => !order.archived),
   }), mapDispatchToProps)

@@ -7,3 +7,11 @@
 .meal:nth-child(2n) {
   background-color: $accentWhite;
 }
+
+.priceWrap {
+  display: flex;
+}
+
+.priceText {
+  flex: 1;
+}

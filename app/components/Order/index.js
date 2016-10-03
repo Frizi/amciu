@@ -29,9 +29,12 @@ const priceSum = (meals = []) =>
 const getMeals = (mealsSrc) =>
   orderBy(toPairs(mealsSrc || []), 0);
 
-function Order({ order, onStatusChange, active, onFocus, onAddMeal, onArchive }) {
+function Order({ order, onStatusChange, active, onFocus, onAddMeal, onDeleteMeal, onArchive, currentUser }) {
   const Chevron = active ? FaAngleUp : FaAngleDown;
   const meals = getMeals(order.meals || []);
+
+  const ownOrder = currentUser === order.owner;
+
   return (
     <div className={styles.order}>
       <Button variant="wrapper" onClick={onFocus}>
@@ -71,7 +74,7 @@ function Order({ order, onStatusChange, active, onFocus, onAddMeal, onArchive })
             <div className={styles.statusText}>
               <FormattedMessage {...messages.status} />
             </div>
-            <OrderStatus onChange={order.archived ? () => {} : onStatusChange} status={order.status} />
+            <OrderStatus onChange={ownOrder && order.archived ? () => {} : onStatusChange} status={order.status} />
           </div>
 
           {meals.length > 0 &&
@@ -83,9 +86,10 @@ function Order({ order, onStatusChange, active, onFocus, onAddMeal, onArchive })
             />
           }
           <div>
-            {meals.map(([key, meal]) =>
-              <Meal meal={meal} key={key} />
-            )}
+            {meals.map(([key, meal]) => {
+              const ownMeal = currentUser === meal.orderer;
+              return <Meal meal={meal} key={key} onDelete={ownMeal && onDeleteMeal ? (() => onDeleteMeal(key)) : null} />;
+            })}
           </div>
         </div>
       }
@@ -99,7 +103,9 @@ Order.propTypes = {
   active: PropTypes.bool,
   onFocus: PropTypes.func,
   onAddMeal: PropTypes.func,
+  onDeleteMeal: PropTypes.func,
   onArchive: PropTypes.func,
+  currentUser: PropTypes.string,
 };
 
 export default Order;

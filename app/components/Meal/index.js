@@ -1,7 +1,11 @@
 import React, { PropTypes } from 'react';
-import styles from './styles.scss';
-import OrderFrame from '../OrderFrame';
 import { FormattedNumber } from 'react-intl';
+import FaTrash from 'react-icons/lib/fa/trash';
+
+import OrderFrame from '../OrderFrame';
+import Button from '../Button';
+
+import styles from './styles.scss';
 
 export const mealType = PropTypes.shape({
   name: PropTypes.string.isRequired,
@@ -9,7 +13,7 @@ export const mealType = PropTypes.shape({
   price: PropTypes.number.isRequired,
 });
 
-function Meal({ meal: { name, orderer, price } }) {
+function Meal({ meal: { name, orderer, price }, onDelete }) {
   return (
     <OrderFrame
       className={styles.meal}
@@ -24,6 +28,7 @@ function Meal({ meal: { name, orderer, price } }) {
               value={price / 100}
             />
           </div>
+          {onDelete && <Button onClick={onDelete}><FaTrash /></Button>}
         </div>
       }
     />
@@ -31,7 +36,8 @@ function Meal({ meal: { name, orderer, price } }) {
 }
 
 Meal.propTypes = {
-  meal: mealType,
+  meal: mealType.isRequired,
+  onDelete: PropTypes.func,
 };
 
 export default Meal;

@@ -15,6 +15,7 @@ import { ordersConnector, ordersSelector } from '../../utils/ordersService';
 export class HistoryOrdersPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     orders: PropTypes.array,
+    currentUser: PropTypes.string,
     params: PropTypes.object,
   };
 
@@ -23,12 +24,17 @@ export class HistoryOrdersPage extends React.Component { // eslint-disable-line 
   };
 
   render() {
-    const { orders, params } = this.props;
+    const { orders, params, currentUser } = this.props;
     const { router } = this.context;
     return (
       <div>
         <Helmet title="History - AmciuApp" />
-        <OrderList orders={orders} activeKey={params.order} onFocus={(id) => router.transitionTo(`/history/${id}`)} />
+        <OrderList
+          orders={orders}
+          activeKey={params.order}
+          onFocus={(id) => router.transitionTo(`/history/${id}`)}
+          currentUser={currentUser}
+        />
       </div>
     );
   }
@@ -43,6 +49,7 @@ function mapDispatchToProps(dispatch) {
 export default compose(
   ordersConnector,
   connect((state) => ({
+    currentUser: (state.getIn(['firebase', 'auth']) || {}).displayName,
     orders: ordersSelector(state)
       .filter(([, order]) => order.archived),
   }), mapDispatchToProps)
