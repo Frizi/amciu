@@ -4,7 +4,10 @@ import messages from './messages';
 import styles from './styles.scss';
 
 import Firebase from 'firebase';
+import FaPower from 'react-icons/lib/fa/power-off';
+import FaGithub from 'react-icons/lib/fa/github';
 
+import Button from '../Button';
 
 export default class AppHeader extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -27,16 +30,28 @@ export default class AppHeader extends React.Component { // eslint-disable-line 
     return (
       <div className={styles.appHeader}>
         <div className={styles.logo}><FormattedMessage {...messages.header} /></div>
-        <div className={styles.profile}>
-          {auth ?
-            <button onClick={onLogout}>
-              {auth.displayName}
-              <img className={styles.avatar} src={auth.photoURL} alt="avatar" />
-              <FormattedMessage {...messages.logout} />
-            </button> :
-            <button onClick={this.handleSignup}><FormattedMessage {...messages.login} /></button>
-          }
-        </div>
+        {auth &&
+          <div className={styles.profile}>
+            <img className={styles.avatar} src={auth.photoURL} alt="avatar" />
+            {auth.displayName}
+          </div>
+        }
+        {auth ?
+          <Button
+            variant="nav"
+            onClick={onLogout}
+          >
+            <FaPower />
+            <FormattedMessage {...messages.logout} />
+          </Button> :
+          <Button
+            variant="nav"
+            onClick={this.handleSignup}
+          >
+            <FaGithub />
+            <FormattedMessage {...messages.login} />
+          </Button>
+        }
       </div>
     );
   }

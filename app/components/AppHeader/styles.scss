@@ -3,10 +3,14 @@
 .appHeader {
   background: $brandBlue;
   display: flex;
+  align-items: center;
   color: white;
   line-height: 60px;
-  padding: 0 40px;
   box-shadow: inset -1px 0 3px rgba(black, 0.24);
+  padding: 0 $unit-x2;
+  @include md {
+    padding: 0 $unit-x6;
+  }
 }
 
 .logo {
@@ -15,13 +19,16 @@
   font-weight: bold;
 }
 
-.profile {
-  align-self: flex-end;
-}
-
 .avatar {
   width: 30px;
   height: 30px;
   margin: 0 5px;
   border-radius: 15px;
+}
+
+.profile {
+  display: none;
+  @include md {
+    display: block;
+  }
 }

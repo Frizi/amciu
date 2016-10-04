@@ -42,6 +42,23 @@
   color: $dimGray;
 }
 
+.nav {
+  composes: button;
+  color: white;
+  border-radius: 0;
+  padding: ($unit + 2px) ($unit);
+  margin-left: $unit;
+  border-left: 1px solid white;
+  @include md {
+    padding: ($unit + 2px) ($unit-x2 + 2px);
+    margin-left: $unit-x2 + 2px;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
 .wrapper {
   display: block;
   width: 100%;
