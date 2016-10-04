@@ -12,6 +12,8 @@ import OrderList from '../../components/OrdersList';
 import { compose } from 'redux';
 import { ordersConnector, ordersSelector } from '../../utils/ordersService';
 
+import styles from './styles.scss';
+
 export class HistoryOrdersPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     orders: PropTypes.array,
@@ -27,7 +29,7 @@ export class HistoryOrdersPage extends React.Component { // eslint-disable-line 
     const { orders, params, currentUser } = this.props;
     const { router } = this.context;
     return (
-      <div>
+      <div className={styles.historyOrdersPage}>
         <Helmet title="History - AmciuApp" />
         <OrderList
           orders={orders}
