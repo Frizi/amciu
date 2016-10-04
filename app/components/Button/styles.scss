@@ -42,6 +42,12 @@
   color: $dimGray;
 }
 
+.action {
+  composes: button buttonShadow;
+  padding: $unit;
+  color: $dimGray;
+}
+
 .nav {
   composes: button;
   color: white;

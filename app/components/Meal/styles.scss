@@ -2,6 +2,7 @@
 
 .meal {
   padding: $unit-x2 0;
+  align-items: center;
 }
 
 .meal:nth-child(2n) {
@@ -10,6 +11,7 @@
 
 .priceWrap {
   display: flex;
+  align-items: center;
 }
 
 .priceText {

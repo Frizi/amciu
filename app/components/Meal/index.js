@@ -28,7 +28,7 @@ function Meal({ meal: { name, orderer, price }, onDelete }) {
               value={price / 100}
             />
           </div>
-          {onDelete && <Button onClick={onDelete}><FaTrash /></Button>}
+          {onDelete && <Button variant="action" onClick={onDelete}><FaTrash /></Button>}
         </div>
       }
     />
