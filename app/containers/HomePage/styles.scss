@@ -3,6 +3,7 @@
 .homePage {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .container {
@@ -23,8 +24,18 @@
 .orderSection {
   background: $lightBlue;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding-bottom: 100px;
   @include shadow();
+}
+
+.pageContainer {
+  composes: container;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {

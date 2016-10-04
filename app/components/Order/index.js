@@ -88,7 +88,7 @@ function Order({ order, onStatusChange, active, onFocus, onAddMeal, onDeleteMeal
           <div>
             {meals.map(([key, meal]) => {
               const ownMeal = currentUser === meal.orderer;
-              return <Meal meal={meal} key={key} onDelete={ownMeal && onDeleteMeal ? (() => onDeleteMeal(key)) : null} />;
+              return <Meal meal={meal} key={key} onDelete={ownMeal && !order.archived && onDeleteMeal ? (() => onDeleteMeal(key)) : null} />;
             })}
           </div>
         </div>

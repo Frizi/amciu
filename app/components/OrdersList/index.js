@@ -27,8 +27,6 @@ function OrdersList({ orders, activeKey, onFocus, onAddMeal, currentUser, fireba
     firebase.remove(`/orders/${key}/meals/${mealKey}`);
   };
 
-  // const currentUser =
-
   return (
     <div>
       <OrderFrame

@@ -6,11 +6,12 @@
  */
 
 import React, { PropTypes } from 'react';
-import cn from 'classnames';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import HistoryOrdersPage from '../HistoryOrdersPage';
 import ActiveOrdersPage from '../ActiveOrdersPage';
+import LogInPage from '../LogInPage';
 import NotFoundPage from '../NotFoundPage';
 
 import Link from 'react-router/Link';
@@ -19,17 +20,18 @@ import Miss from 'react-router/Miss';
 
 import styles from './styles.scss';
 
-export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
-    className: PropTypes.string,
+    auth: PropTypes.object,
   };
 
   render() {
     const activePattern = '/:order([^/]{8,})?/:new(new|new-meal)?';
     const historyPattern = '/history/:order([^/]{8,})?';
+    const { auth } = this.props;
 
     return (
-      <div className={cn(styles.homePage, this.props.className)}>
+      <div className={styles.homePage}>
         <section className={styles.header}>
           <h1><FormattedMessage {...messages.orders} /></h1>
           <nav>
@@ -44,13 +46,24 @@ export default class HomePage extends React.Component { // eslint-disable-line r
           </nav>
         </section>
         <section className={styles.orderSection}>
-          <div className={styles.container}>
-            <Match pattern={historyPattern} component={HistoryOrdersPage} />
-            <Match pattern={activePattern} component={ActiveOrdersPage} />
-            <Miss component={NotFoundPage} />
-          </div>
+          { auth ?
+            <div className={styles.pageContainer}>
+              <Match pattern={historyPattern} component={HistoryOrdersPage} />
+              <Match pattern={activePattern} component={ActiveOrdersPage} />
+              <Miss component={NotFoundPage} />
+            </div> :
+            <div className={styles.pageContainer}>
+              <Match pattern={historyPattern} component={LogInPage} />
+              <Match pattern={activePattern} component={LogInPage} />
+              <Miss component={NotFoundPage} />
+            </div>
+          }
         </section>
       </div>
     );
   }
 }
+
+export default connect((state) => ({
+  auth: state.getIn(['firebase', 'auth']),
+}))(HomePage);
